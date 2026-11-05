@@ -8,7 +8,18 @@ canvas.height = 480;
 
 const TILE = 24;
 
-const map = [
+const viewMap = [
+ [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+ [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+ [1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,1],
+ [1,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,1],
+ [1,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,1],
+ [1,0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0,1],
+ [1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1],
+ [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+];
+
+const moveMap = [
  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
  [1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,1],
@@ -26,9 +37,9 @@ const player = {
 }
 
 function drawMap() {
-    for(let y = 0; y< map.length; y++){
-        for (let x = 0; x < map[y].length; x++){
-            ctx.fillStyle = map[y][x] === 1
+    for(let y = 0; y< viewMap.length; y++){
+        for (let x = 0; x < viewMap[y].length; x++){
+            ctx.fillStyle = viewMap[y][x] === 1
             ? "#555"
             : "#477d43";
             
@@ -65,7 +76,7 @@ function movePlayer(dx, dy){
     const newX = player.x + dx;
     const newY = player.y + dy;
 
-    if(map[newY] && map[newY][newX] === 0){
+    if(moveMap[newY] && moveMap[newY][newX] === 0){
         player.x = newX;
         player.y = newY
     }
