@@ -22,7 +22,7 @@ const viewMap = [
 const moveMap = [
  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
- [1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,1],
+ [1,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,1], 
  [1,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,1],
  [1,0,0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,0,0,1],
  [1,0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0,1],
@@ -36,24 +36,29 @@ const player = {
     color: "#ffcc44"
 }
 
+
+
+
 function drawMap() {
-    for(let y = 0; y< viewMap.length; y++){
+    const offsetX = canvas.width / 2 - player.x * TILE - TILE / 2;
+    const offsetY = canvas.height / 2 - player.y * TILE - TILE / 2;
+    for(let y = 0; y < viewMap.length; y++){
         for (let x = 0; x < viewMap[y].length; x++){
             ctx.fillStyle = viewMap[y][x] === 1
             ? "#555"
             : "#477d43";
             
             ctx.fillRect(
-                x * TILE,
-                y * TILE,
+                x * TILE + offsetX,
+                y * TILE + offsetY,
                 TILE,
                 TILE
             );
 
             ctx.strokeStyle = "#ffffff15";
             ctx.strokeRect(
-                x * TILE,
-                y * TILE,
+                x * TILE + offsetX,
+                y * TILE + offsetY,
                 TILE,
                 TILE
             );
@@ -64,15 +69,21 @@ function drawMap() {
 function drawPlayer(){
     ctx.fillStyle = player.color;
 
+
     ctx.fillRect(
-        player.x * TILE + 5,
-        player.y * TILE + 5,
-        TILE - 10,
-        TILE - 10
+        canvas.width / 2 - TILE / 2 + 5,
+        canvas.height / 2 - TILE / 2 + 5,
+        TILE-10,
+        TILE-10
+        // player.x * TILE + 5,
+        // player.y * TILE + 5,
+        // TILE - 10,
+        // TILE - 10
     )
 }
 
 function movePlayer(dx, dy){
+    
     const newX = player.x + dx;
     const newY = player.y + dy;
 
